@@ -1,0 +1,19 @@
+<form action="#" (ngSubmit)="getAllPokemons(input_limit.valueAsNumber,input_offset.valueAsNumber)">
+    <input type="number" placeholder="Limit of the Pokemons" #input_limit/>
+    <input type="number" placeholder="Offset of the Pokemons" #input_offset>
+    <button type="submit">Generate Pokemons</button>
+</form>
+
+<ul *ngFor="let pokemon of catchPokemon">
+    <li>Name:{{pokemon.name}}</li>
+    <li>Weight:{{pokemon.weight}}</li>
+    <li>Height:{{pokemon.height}}</li>
+    <li>Sprite:{{pokemon.sprites}}</li>
+    <ul *ngFor="let pokeStats of pokemon.stats">
+        <li>Base Stat:{{pokeStats.base_stat}}</li>
+        <li>Name:{{pokeStats.stat.name}}</li>
+    </ul>
+    <ul *ngFor="let pokeTypes of pokemon.types">
+        <li>Type:{{pokeTypes.type.name}}</li>
+    </ul>
+</ul>
