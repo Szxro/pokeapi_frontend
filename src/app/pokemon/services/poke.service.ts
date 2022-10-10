@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { AllResponse } from '../interfaces/allReponse';
 import { environment } from '../../../environments/environment';
 import { DBResponse } from '../interfaces/dbResponse';
-import { PokeNameResponse } from '../interfaces/pokeNameResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +14,7 @@ export class PokeService {
   private urlDB: string = environment.dbUrl; /*Just a Get*/
   /*Need a name*/
   private searchByName: string = environment.searchPokeName;
+  private savePokemon: string = environment.savePokemon;
 
   constructor(private _http: HttpClient) {}
 
@@ -34,7 +34,11 @@ export class PokeService {
     return this._http.get<DBResponse>(this.urlDB);
   }
 
-  getByName(name: string): Observable<PokeNameResponse> {
-    return this._http.get<PokeNameResponse>(`"${this.searchByName}/${name}"`);
+  getByName(name: string): Observable<AllResponse> {
+    return this._http.get<AllResponse>(`${this.searchByName}/${name}`);
+  }
+
+  saveByName(name: string): Observable<AllResponse> {
+    return this._http.get<AllResponse>(`${this.savePokemon}/${name}`);
   }
 }

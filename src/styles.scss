@@ -1,1 +1,55 @@
 /* You can add global styles to this file, and also import other style files */
+@import "../node_modules/angular-notifier/styles.css";
+
+*,
+*::after,
+*::before{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.rock,
+.ground {
+   background-color: rgb(148, 81, 81);
+ }
+ .ghost {
+   background-color: rgb(247, 247, 247);
+ }
+ .electric {
+   background-color: rgb(255, 255, 161);
+ }
+ .bug {
+   background-color: #F6D6A7;
+ }
+ .poison {
+   background-color: #e0a7f6;
+ }
+ .normal,
+ .flying {
+   background-color: #F4F4F4;
+ }
+ .fairy,
+ .fighting {
+   background-color: rgba(255, 192, 203, 0.863);
+ }
+ .fire {
+   background-color: #FBE3DF;
+ }
+ .grass {
+   background-color:#E2F9E1;
+ }
+ .water,
+ .ice,
+ .dragon {
+   background-color:#E0F1FD;
+ }
+
+ .psychic{
+   background-color: #6d2c7d;
+ }
+
+ .dark,
+ .steel{
+   background-color: #808080;
+ }

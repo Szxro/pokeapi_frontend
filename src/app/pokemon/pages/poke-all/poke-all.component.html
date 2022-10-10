@@ -1,19 +1,20 @@
-<form action="#" (ngSubmit)="getAllPokemons(input_limit.valueAsNumber,input_offset.valueAsNumber)">
-    <input type="number" placeholder="Limit of the Pokemons" #input_limit/>
-    <input type="number" placeholder="Offset of the Pokemons" #input_offset>
-    <button type="submit">Generate Pokemons</button>
-</form>
-
-<ul *ngFor="let pokemon of catchPokemon">
-    <li>Name:{{pokemon.name}}</li>
-    <li>Weight:{{pokemon.weight}}</li>
-    <li>Height:{{pokemon.height}}</li>
-    <li>Sprite:{{pokemon.sprites}}</li>
-    <ul *ngFor="let pokeStats of pokemon.stats">
-        <li>Base Stat:{{pokeStats.base_stat}}</li>
-        <li>Name:{{pokeStats.stat.name}}</li>
-    </ul>
-    <ul *ngFor="let pokeTypes of pokemon.types">
-        <li>Type:{{pokeTypes.type.name}}</li>
-    </ul>
-</ul>
+<div class="container mb-3">
+    <div class="col">
+        <div class="row g-3">
+            <form action="#" [formGroup]="formSubmit" (ngSubmit)="getDataForm()">
+                <div class="col mb-2">
+                    <label for="limit" class="form-label">Pokemon Limit:</label>
+                    <input class="form-control" type="number" id="limit" name="limit" formControlName="limit">
+                    <span class="form-text text-danger" *ngIf="checkInputs('limit')">{{limitErrors}}</span>
+                </div>
+                <div class="col mb-2">
+                    <label for="offset" class="form-label">Pokemon Offset:</label>
+                   <input class="form-control" type="number" id="offset" name="offset" formControlName="offset">
+                   <span class="form-text text-danger" *ngIf="checkInputs('offset')">{{offsetErrors}}</span>
+                </div>
+                <button type="submit" class="btn btn-dark">Generate Pokemons</button>
+            </form>
+        </div>
+    </div>
+  </div>
+<app-poke-list [pokeList]="catchPokemon" [errorCacth]="errorList" [loading]="loading" [save]="true"></app-poke-list>

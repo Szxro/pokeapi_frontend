@@ -1,0 +1,41 @@
+<ng-template [ngIf]="loading" [ngIfElse]="pokemonList" >
+   <div class="d-flex align-items-center justify-content-center">
+       <h1>Waiting for the data</h1>
+   </div>
+</ng-template>
+
+<notifier-container></notifier-container>
+
+ <ng-template #pokemonList>
+    <div class="container">
+        <div class="row row-cols-3 g-3">
+              <div class="col card m-2" style="width:18em;" *ngFor="let pokemons of pokeList">
+                  <img [src]="pokemons.sprites | pipeImage" [alt]="pokemons.name" class="p-3">
+                  <div class="card-body">
+                      <h5 class="card-title">{{pokemons.name | titlecase}}</h5>
+                      <ul class="list-group list-group-flush">
+                          <li class="list-group-item">Weight: {{pokemons.weight}}</li>
+                          <li class="list-group-item">Height: {{pokemons.height}}</li>
+                      </ul>
+                      <hr>
+                      <ul class="list-group list-group-flush" *ngFor="let pokeStats of pokemons.stats.slice(0,3)">
+                          <li class="list-group-item">{{pokeStats.stat.name | titlecase}}: {{pokeStats.base_stat}}</li>
+                      </ul>
+                      <ul class="list-group list-group-flush" *ngFor="let pokeTypes of pokemons.types">
+                          <li class="list-group-item">
+                              <button type="button" class="btn"[class]="pokeTypes.type.name" style="margin-right:1.2em;">
+                                  {{pokeTypes.type.name |titlecase }}
+                              </button>
+                            </li>
+                        </ul>
+                        <ng-template [ngIf]="save">
+                            <button type="button" class="btn btn-dark float-end" (click)="getName(pokemons.name)">
+                                Save Pokemon
+                            </button>
+                          </ng-template>
+                    </div>
+              </div>
+        </div>
+    </div>
+ </ng-template>
+ 

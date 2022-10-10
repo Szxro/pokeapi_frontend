@@ -7,6 +7,7 @@ export const environment = {
   allUrl: 'https://localhost:7145/api/Poke/GetAll',
   dbUrl: 'https://localhost:7145/api/Poke/getPokemons',
   searchPokeName: 'https://localhost:7145/api/Poke/search',
+  savePokemon: 'https://localhost:7145/api/Poke/save',
 };
 
 /*
