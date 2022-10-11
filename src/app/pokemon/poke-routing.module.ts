@@ -6,10 +6,10 @@ import { SearchPokemonComponent } from './pages/search-pokemon/search-pokemon.co
 
 const routes: Routes = [
   {
-    path: 'pokemon',
+    path: '',
     children: [
       {
-        path: 'pokeAll',
+        path: '',
         component: PokeAllComponent,
       },
       {

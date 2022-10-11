@@ -8,6 +8,7 @@ export const environment = {
   dbUrl: 'https://localhost:7145/api/Poke/getPokemons',
   searchPokeName: 'https://localhost:7145/api/Poke/search',
   savePokemon: 'https://localhost:7145/api/Poke/save',
+  deletePokemon: 'https://localhost:7145/api/Poke/deletePokemon',
 };
 
 /*

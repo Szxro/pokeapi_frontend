@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PokeService } from '../../services/poke.service';
 import { PokeResponse } from '../../interfaces/pokeResponse';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { catchError } from '../../interfaces/errorCatch';
 import { NotifierService } from 'angular-notifier';
 
@@ -15,28 +14,22 @@ export class PokeAllComponent implements OnInit {
   errorList!: catchError;
   cathError: boolean = false;
   loading: boolean = true;
-  constructor(
-    private _ps: PokeService,
-    private _fb: FormBuilder,
-    private _notifier: NotifierService
-  ) {}
+  offset: number = 0;
+  constructor(private _ps: PokeService, private _notifier: NotifierService) {}
 
-  ngOnInit(): void {}
-
-  formSubmit: FormGroup = this._fb.group({
-    limit: [, [Validators.required, Validators.min(1)]],
-    offset: [, [Validators.required, Validators.min(0)]],
-  });
+  ngOnInit(): void {
+    this.getAllPokemons(20, 0);
+  }
 
   getAllPokemons(limit: number, offset: number) {
     this.catchPokemon = [];
+    this.loading = true;
     this._ps.getAll(limit, offset).subscribe(
       (x) => {
         if (x.data === null) {
-          this.loading = false;
+          this.loading = true;
           this._notifier.notify('error', x.message);
         } else {
-          this.loading = true;
           x.data.map((p) => {
             this.catchPokemon.push({
               name: p.name,
@@ -48,11 +41,11 @@ export class PokeAllComponent implements OnInit {
               types: p.types,
             });
           });
-          this.loading = false;
         }
+        this.loading = false;
       },
       (err) => {
-        this.loading = false;
+        this.loading = true;
         this.errorList = {
           message:
             'Something happen, verify your internet connection or your connection to the DB',
@@ -62,42 +55,15 @@ export class PokeAllComponent implements OnInit {
       }
     );
   }
-  getDataForm() {
-    if (this.formSubmit.invalid) {
-      this.formSubmit.markAllAsTouched();
-      return;
-    }
-    this.getAllPokemons(
-      this.formSubmit.get('limit')?.value,
-      this.formSubmit.get('offset')?.value
-    );
-  }
 
-  checkInputs(value: string) {
-    return (
-      this.formSubmit.controls[value].errors &&
-      this.formSubmit.controls[value].touched
-    );
-  }
-
-  get limitErrors(): string {
-    const errors = this.formSubmit.get('limit')?.errors;
-    if (errors?.['required']) {
-      return 'The Limit is required';
-    } else if (errors?.['min']) {
-      return 'Put a Higher Number';
+  biggerNumber(arg: number): void {
+    this.offset += arg;
+    if (this.offset < 0) {
+      this._notifier.notify('error', 'This is the last page');
+      this.offset = 0;
+    } else {
+      this.getAllPokemons(20, this.offset);
     }
-    return '';
-  }
-
-  get offsetErrors(): string {
-    const errors = this.formSubmit.get('offset')?.errors;
-    if (errors?.['required']) {
-      return 'The Offset is required';
-    } else if (errors?.['min']) {
-      return 'Put a Higher Number';
-    }
-    return '';
   }
 }
-//notify Angular https://www.npmjs.com/package/notify-angular
+//Pnotify Angular https://sciactive.com/pnotify/

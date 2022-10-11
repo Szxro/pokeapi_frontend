@@ -1,1 +1,27 @@
-<p>search-pokemon works!</p>
+<div class="container mb-3">
+  <div class="col">
+    <div class="row g-3">
+      <form action="#" [formGroup]="formSubmit" (ngSubmit)="getDataForm()">
+        <div class="col mb-2">
+          <label for="name" class="form-label">Search Pokemon:</label>
+          <input
+            class="form-control"
+            type="text"
+            id="name"
+            name="name"
+            formControlName="data"
+          />
+          <span class="form-text text-danger" *ngIf="checkInputs('data')">{{
+            dataError
+          }}</span>
+        </div>
+        <button type="submit" class="btn btn-dark">Generate Pokemon</button>
+      </form>
+    </div>
+  </div>
+</div>
+<app-poke-list
+  [pokeList]="catchPokemon"
+  [loading]="loading"
+  [save]="true"
+></app-poke-list>

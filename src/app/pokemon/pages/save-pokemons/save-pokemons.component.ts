@@ -21,12 +21,13 @@ export class SavePokemonsComponent implements OnInit {
   }
 
   private getDbPokemons() {
+    this.loading = true;
     this._ps.getDB().subscribe(
       (x) => {
         if (x.data === null) {
+          this.loading = true;
           this._notifier.notify('error', x.message);
         } else {
-          this.loading = true;
           x.data.map((x) => {
             this.dbPokemons.push({
               name: x.name,
@@ -38,10 +39,11 @@ export class SavePokemonsComponent implements OnInit {
               types: JSON.parse(x.types.types),
             });
           });
-          this.loading = false;
         }
+        this.loading = false;
       },
       (err) => {
+        this.loading = true;
         this.errorList = {
           message:
             'Failed to Load, see if you have internet connection or you are connected to the DB',

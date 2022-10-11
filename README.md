@@ -1,27 +1,30 @@
-# PokeFrontEnd
+# pokeapi_frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.7.
+This project is maded with the api that i created to have some fun with the pokemons
 
-## Development server
+# Preview :eye:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+# Technologies used in this project 👨‍💻
 
-## Code scaffolding
+- Angular
+- Routing (Angular)
+- BootStrap
+- Api maded (pokeapi_backend) (.NET)
+- Api used: https://pokeapi.co/ to get the data
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# Prerequisites 📑
 
-## Build
+1. Git clone this repostiory
+2. Know Typescript and some Angular concepts
+3. Know some bootstrap concepts
+4. Have to configure the pokeapi_backend , make the connections (DB) and see if the endpoints changes.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+# People involved in this project ⌨️
 
-## Running unit tests
+- @Szxro
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+# Hiring (Emails) 👌
 
-## Running end-to-end tests
+If you want to hire me , you only have to write to me.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- szxrocode@gmail.com (@Szxro)

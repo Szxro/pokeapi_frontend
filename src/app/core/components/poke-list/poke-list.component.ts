@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { PokeResponse } from '../../../pokemon/interfaces/pokeResponse';
 import { catchError } from '../../../pokemon/interfaces/errorCatch';
 import { PokeService } from '../../../pokemon/services/poke.service';
@@ -11,18 +11,12 @@ import { NotifierService } from 'angular-notifier';
 })
 export class PokeListComponent implements OnInit {
   @Input('pokeList') pokeList: PokeResponse[] = [];
-  @Input('errorCacth') errorCatch!: catchError;
+  errorCatch!: catchError;
   @Input('loading') loading!: boolean;
   @Input('save') save: boolean = false;
+  @Input('delete') delete: boolean = false;
 
-  private readonly _notifier: NotifierService;
-
-  constructor(
-    private _ps: PokeService,
-    private _notifierService: NotifierService
-  ) {
-    this._notifier = _notifierService;
-  }
+  constructor(private _ps: PokeService, private _notifier: NotifierService) {}
 
   ngOnInit(): void {}
 
@@ -41,11 +35,26 @@ export class PokeListComponent implements OnInit {
         }
       },
       (err) => {
+        this.loading = true;
         this.errorCatch = {
           message: 'Something Happen',
           success: false,
         };
         this._notifier.notify('error', this.errorCatch.message);
+      }
+    );
+  }
+  deletePokemon(name: string) {
+    this._ps.deleteByName(name).subscribe(
+      (x) => {
+        if (x.data == null) {
+          this._notifier.notify('error', x.message);
+        } else {
+          this._notifier.notify('success', 'Pokemon Deleted, refresh the page');
+        }
+      },
+      (err) => {
+        this._notifier.notify('error', 'Something Happen');
       }
     );
   }

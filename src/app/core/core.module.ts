@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RouterModule } from '@angular/router';
 import { PipeImage } from './pipe/pipe-image.pipe';
 import { PokeListComponent } from './components/poke-list/poke-list.component';
@@ -22,13 +21,8 @@ const customNotifierOptions: NotifierOptions = {
 };
 
 @NgModule({
-  declarations: [
-    NavbarComponent,
-    NotFoundComponent,
-    PipeImage,
-    PokeListComponent,
-  ],
-  exports: [NavbarComponent, NotFoundComponent, PipeImage, PokeListComponent],
+  declarations: [NavbarComponent, PipeImage, PokeListComponent],
+  exports: [NavbarComponent, PipeImage, PokeListComponent],
   imports: [
     CommonModule,
     RouterModule,

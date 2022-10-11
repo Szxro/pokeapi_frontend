@@ -15,6 +15,7 @@ export class PokeService {
   /*Need a name*/
   private searchByName: string = environment.searchPokeName;
   private savePokemon: string = environment.savePokemon;
+  private deletePokemon: string = environment.deletePokemon;
 
   constructor(private _http: HttpClient) {}
 
@@ -23,6 +24,11 @@ export class PokeService {
       .set('limit', limit)
       .set('offset', offset);
     return allParams;
+  }
+
+  private deleteParams(name: string): HttpParams {
+    const params = new HttpParams().set('name', name);
+    return params;
   }
 
   getAll(limit: number, offset: number): Observable<AllResponse> {
@@ -40,5 +46,11 @@ export class PokeService {
 
   saveByName(name: string): Observable<AllResponse> {
     return this._http.get<AllResponse>(`${this.savePokemon}/${name}`);
+  }
+
+  deleteByName(name: string): Observable<DBResponse> {
+    return this._http.delete<DBResponse>(this.deletePokemon, {
+      params: this.deleteParams(name),
+    });
   }
 }
