@@ -40,9 +40,3 @@ This project is maded with the api that i created to have some fun with the poke
 # People involved in this project ⌨️
 
 - @Szxro
-
-# Hiring (Emails) 👌
-
-If you want to hire me , you only have to write to me.
-
-- szxrocode@gmail.com (@Szxro)
